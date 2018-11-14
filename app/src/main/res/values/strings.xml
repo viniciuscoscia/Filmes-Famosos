@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Filmes Famosos</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="populares">Populares</string>
+    <string name="melhores_notas">Melhores Notas</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="retry">Tentar novamente</string>
+    <string name="problema_ao_buscar">Houve um problema ao realizar a busca por filmes</string>
+    <string name="movie_poster">Pôster do filme</string>
+    <string name="nota_media">Nota Média:</string>
+    <string name="data_lancamento">Data de Lançamento:</string>
+    <string name="sinopse">Sinopse</string>
+    <string name="avaliacao_usuarios">Avaliações de Usuários</string>
+    <string name="trailers">Trailers</string>
+    <string name="noInternetConnection">Sem conexão à internet</string>
+    <string name="no_favorites_message">Não há favoritos para listar</string>
+</resources>

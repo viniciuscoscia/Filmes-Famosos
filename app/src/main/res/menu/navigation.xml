@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/filmes_populares"
+        android:icon="@drawable/ic_whatshot_red_24dp"
+        android:title="@string/populares" />
+
+    <item
+        android:id="@+id/filmes_melhores_notas"
+        android:icon="@drawable/ic_star_red_24dp"
+        android:title="@string/melhores_notas" />
+
+    <item
+        android:id="@+id/filmes_favoritos"
+        android:icon="@drawable/ic_favorite_red_24dp"
+        android:title="@string/favoritos" />
+
+</menu>
