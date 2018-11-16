@@ -3,9 +3,12 @@ package com.example.viniciuscoscia.filmesfamosospt2.ui.mainActivity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,6 +26,9 @@ public class MainActivity extends FilmesFamososActivity implements MovieAdapter.
     private MainViewModel mainViewModel;
     private ProgressBar progressBar;
     private TextView tvEmptyFavoritesMessage;
+    private RecyclerView.LayoutManager layoutManager;
+    private Parcelable mListState;
+    private static final String LIST_STATE_KEY = "LIST_STATE_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +57,10 @@ public class MainActivity extends FilmesFamososActivity implements MovieAdapter.
     }
 
     private void configureRecyclerView() {
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
+
+        int posterWidth = 500;
+        layoutManager =
+                new GridLayoutManager(this, calculateBestSpanCount(posterWidth));
         recyclerView = findViewById(R.id.rv_movies);
         adapter = new MovieAdapter(this);
 
@@ -140,5 +149,31 @@ public class MainActivity extends FilmesFamososActivity implements MovieAdapter.
     protected void onResume() {
         super.onResume();
         searchMovies();
+
+        if (mListState != null) {
+            layoutManager.onRestoreInstanceState(mListState);
+        }
+    }
+
+    private int calculateBestSpanCount(int posterWidth) {
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+        float screenWidth = outMetrics.widthPixels;
+        return Math.round(screenWidth / posterWidth);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mListState = layoutManager.onSaveInstanceState();
+        outState.putParcelable(LIST_STATE_KEY, mListState);
+    }
+
+    protected void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+
+        if(state != null)
+            mListState = state.getParcelable(LIST_STATE_KEY);
     }
 }
